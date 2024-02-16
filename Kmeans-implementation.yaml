@@ -1,0 +1,6 @@
+pandas~=2.1.4
+matplotlib~=3.8.0
+numpy~=1.24.3
+scikit-learn~=1.4.0rc1
+nltk~=3.8.1
+pillow~=10.2.0
