@@ -2,8 +2,9 @@
 Testing the KMeans class.
 Blobs are generated using `make_blobs` for clustering.
 """
-from kmeans import KMeans
+from custom_kmeans import CustomKMeans as KMeans
 from sklearn.datasets import make_blobs
+import numpy as np
 
 
 def test_init():

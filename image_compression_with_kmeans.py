@@ -2,9 +2,10 @@
 Image Compression using K-Means. The pixel space is mapped into $R^3$,
 and the number of colors is reduced to compress the image.
 """
-from kmeans import KMeans
 import matplotlib.pyplot as plt
 from PIL import Image
+from custom_kmeans import CustomKMeans as KMeans
+import numpy as np
 
 
 class ImageCompression:
@@ -31,7 +32,7 @@ class ImageCompression:
         self.kmeans.fit(img_data)
         cluster_centers = self.kmeans.get_centroids()
         labels = self.kmeans.predict(img_data)
-        compressed_img = cluster_centers[ labels ].reshape(img.shape)
+        compressed_img = cluster_centers[labels].reshape(img.shape)
 
         return img, compressed_img, self.n_clusters
 
@@ -44,7 +45,7 @@ class ImageCompression:
         :param num_clusters: Number of clusters for plot title
         :return: None
         """
-        fig, ax = plt.subplots(1, 2, figsize=(16, 8))
+        ax = plt.subplots(1, 2, figsize=(16, 8))
         ax[0].imshow(img)
         ax[0].set_title('Original Image')
         ax[1].imshow(compressed_img.astype('uint8'))

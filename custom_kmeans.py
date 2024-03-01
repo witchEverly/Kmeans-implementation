@@ -14,7 +14,7 @@ https://domino.ai/blog/getting-started-with-k-means-clustering-in-python
 import numpy as np
 
 
-class KMeans:
+class CustomKMeans:
     """
     KMeans clustering algorithm. The algorithm is initialized with the number of clusters and
     the maximum number of iterations. The algorithm is fit to the input data and the centroids
@@ -45,13 +45,13 @@ class KMeans:
         """
         # Step 2
         np.random.seed(self.random_state)
-        self.centroids = data[ np.random.choice(data.shape[ 0 ], self.n_clusters, replace=False) ]
+        self.centroids = data[np.random.choice(data.shape[0], self.n_clusters, replace=False)]
         # Step 3 and 4
         for i in range(self.max_iterations):
             labels = self.predict(data)
             # Step 5 and 6
             new_centroids = np.array(
-                [ data[ labels == i ].mean(axis=0) for i in range(self.n_clusters) ]
+                [data[labels == i].mean(axis=0) for i in range(self.n_clusters)]
             )
             if np.all(self.centroids == new_centroids):
                 break
@@ -69,9 +69,9 @@ class KMeans:
         """
         # Step 3
         if distance_metric == 'euclidean':
-            distances = np.sqrt(((data - self.centroids[ :, np.newaxis ]) ** 2).sum(axis=2))
+            distances = np.sqrt(((data - self.centroids[:, np.newaxis]) ** 2).sum(axis=2))
         elif distance_metric == 'manhattan':
-            distances = np.abs(data - self.centroids[ :, np.newaxis ]).sum(axis=2)
+            distances = np.abs(data - self.centroids[:, np.newaxis]).sum(axis=2)
         else:
             raise ValueError('Invalid distance metric')
 
